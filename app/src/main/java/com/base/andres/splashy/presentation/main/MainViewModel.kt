@@ -1,4 +1,4 @@
-package com.base.andres.splashy.presentation
+package com.base.andres.splashy.presentation.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,16 +8,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class MainViewModel(private val searchArtUseCase: SearchArt): ViewModel() {
     var artSearch: MutableLiveData<List<Int>> = MutableLiveData()
-    var searchArt: SearchArt? = null
-
-    fun setUseCase(searchArt: SearchArt) {
-        this.searchArt = searchArt
-    }
 
     fun search() {
-        searchArt!!.search("neptune").enqueue(object: Callback<ArtSearchResponse> {
+        searchArtUseCase.search("neptune").enqueue(object: Callback<ArtSearchResponse> {
             override fun onFailure(call: Call<ArtSearchResponse>, t: Throwable) {
                 artSearch.value = emptyList()
             }
