@@ -9,17 +9,19 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel(private val searchArtUseCase: SearchArt): ViewModel() {
-    var artSearch: MutableLiveData<List<Int>> = MutableLiveData()
+    var results: MutableLiveData<List<Int>> = MutableLiveData()
 
     fun search() {
         searchArtUseCase.search("neptune").enqueue(object: Callback<ArtSearchResponse> {
             override fun onFailure(call: Call<ArtSearchResponse>, t: Throwable) {
-                artSearch.value = emptyList()
+                results.value = emptyList()
             }
 
             override fun onResponse(call: Call<ArtSearchResponse>, response: Response<ArtSearchResponse>) {
                 if (response.isSuccessful && response.body() != null) {
-                    artSearch.value = response.body()!!.results
+                    results.value = response.body()!!.results
+                } else {
+                    results.value = emptyList()
                 }
             }
         })
