@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainViewModel.results.observe(this, Observer {
+        mainViewModel.artworkIds.observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
                 hideError()
                 showResults(it)

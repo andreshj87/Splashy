@@ -2,7 +2,7 @@ package com.base.andres.splashy.domain
 
 import com.base.andres.splashy.data.ArtApiService
 
-class ArtRepository(private val artApiService: ArtApiService) {
+class ArtworkRepository(private val artApiService: ArtApiService) {
     fun search(keywords: String): List<Int> {
         val results: List<Int>
         val apiResponse = artApiService.search(keywords).execute()

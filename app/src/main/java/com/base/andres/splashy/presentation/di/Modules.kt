@@ -2,8 +2,8 @@ package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
 import com.base.andres.splashy.data.ArtApiService
-import com.base.andres.splashy.domain.ArtRepository
-import com.base.andres.splashy.domain.SearchArt
+import com.base.andres.splashy.domain.ArtworkRepository
+import com.base.andres.splashy.domain.SearchArtworks
 import com.base.andres.splashy.presentation.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,11 +18,11 @@ val applicationModule = module(override = true) {
     }
 
     single {
-        SearchArt(get())
+        SearchArtworks(get())
     }
 
     single {
-        ArtRepository(get())
+        ArtworkRepository(get())
     }
 
     single {
