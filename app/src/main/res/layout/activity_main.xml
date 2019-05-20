@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
     tools:context=".presentation.main.MainActivity">
 
     <TextView
-        android:id="@+id/text_results"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello World!"/>
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/text_artwork_highlight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        tools:text="Artwork result highlight"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
+
+    <TextView
+        android:id="@+id/text_artwork_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="Search results:"/>
 
     <TextView
         android:id="@+id/text_error"
@@ -21,4 +48,4 @@
         android:text="@string/error_message"
         android:visibility="gone"/>
 
-</RelativeLayout>
+</LinearLayout>

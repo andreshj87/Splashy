@@ -1,8 +1,10 @@
 package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
-import com.base.andres.splashy.data.ArtApiService
+import com.base.andres.splashy.data.ArtworkApiService
+import com.base.andres.splashy.data.ArtworkMapper
 import com.base.andres.splashy.domain.ArtworkRepository
+import com.base.andres.splashy.domain.GetArtwork
 import com.base.andres.splashy.domain.SearchArtworks
 import com.base.andres.splashy.presentation.main.MainViewModel
 import okhttp3.OkHttpClient
@@ -14,7 +16,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 val applicationModule = module(override = true) {
     viewModel {
-        MainViewModel(get())
+        MainViewModel(get(), get())
     }
 
     single {
@@ -22,7 +24,15 @@ val applicationModule = module(override = true) {
     }
 
     single {
-        ArtworkRepository(get())
+        GetArtwork(get())
+    }
+
+    single {
+        ArtworkRepository(get(), get())
+    }
+
+    single {
+        ArtworkMapper()
     }
 
     single {
@@ -38,8 +48,8 @@ val applicationModule = module(override = true) {
     }
 }
 
-fun provideApiService(retrofit: Retrofit): ArtApiService {
-    return retrofit.create(ArtApiService::class.java)
+fun provideApiService(retrofit: Retrofit): ArtworkApiService {
+    return retrofit.create(ArtworkApiService::class.java)
 }
 
 fun provideRetrofit(apiUrl: String, okHttpClient: OkHttpClient): Retrofit {

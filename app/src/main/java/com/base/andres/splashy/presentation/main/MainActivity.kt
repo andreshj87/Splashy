@@ -16,10 +16,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mainViewModel.artworkIds.observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
-                hideError()
+                showError(false)
                 showResults(it)
             } else {
                 showError()
+            }
+        })
+        mainViewModel.firstArtwork.observe(this, Observer {
+            if (it != null) {
+                text_artwork_highlight.text = "${it.title} by ${it.artist}"
             }
         })
         mainViewModel.search()
@@ -30,18 +35,10 @@ class MainActivity : AppCompatActivity() {
         for (searchResult in results) {
             textValues = "$textValues, $searchResult"
         }
-        text_results.text = textValues
+        text_artwork_results.text = textValues
     }
 
-    private fun hideError() {
-        showError(true)
-    }
-
-    private fun showError() {
-        showError(false);
-    }
-
-    private fun showError(show: Boolean) {
+    private fun showError(show: Boolean = true) {
         when (show) {
             true -> text_error.visibility = View.VISIBLE
             false -> text_error.visibility = View.GONE
