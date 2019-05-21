@@ -2,9 +2,11 @@ package com.base.andres.splashy.presentation.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.base.andres.splashy.domain.Artwork
-import com.base.andres.splashy.domain.GetArtwork
-import com.base.andres.splashy.domain.SearchArtworks
+import com.base.andres.splashy.domain.Either
+import com.base.andres.splashy.domain.Failure
+import com.base.andres.splashy.domain.entity.Artwork
+import com.base.andres.splashy.domain.usecase.GetArtwork
+import com.base.andres.splashy.domain.usecase.SearchArtworks
 import kotlinx.coroutines.Job
 
 class MainViewModel(
@@ -17,14 +19,28 @@ class MainViewModel(
     var firstArtwork: MutableLiveData<Artwork?> = MutableLiveData()
 
     fun search() {
-        searchArtworksUseCase(termToSearch, job, onResult = {
-            artworkIds.value = it
-            val firstArtworkId = it[0]
-            getArtwork(firstArtworkId, job, ::renderFirstArtwork)
-        })
+        searchArtworksUseCase(SearchArtworks.Params(termToSearch), job) {
+            it.either(::renderSearchError, ::handleSearchResults)
+        }
     }
 
-    private fun renderFirstArtwork(artwork: Artwork?) {
+    private fun handleSearchResults(artworkIds: List<Int>) {
+        this.artworkIds.value = artworkIds
+        val firstArtworkId = artworkIds[0]
+        getArtwork(GetArtwork.Params(firstArtworkId), job) {
+            it.either(::renderError, ::renderFirstArtwork)
+        }
+    }
+
+    private fun renderSearchError(failure: Failure) {
+
+    }
+
+    private fun renderError(failure: Failure) {
+
+    }
+
+    private fun renderFirstArtwork(artwork: Artwork) {
         firstArtwork.value = artwork
     }
 }

@@ -1,11 +1,11 @@
 package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
-import com.base.andres.splashy.data.ArtworkApiService
-import com.base.andres.splashy.data.ArtworkMapper
-import com.base.andres.splashy.domain.ArtworkRepository
-import com.base.andres.splashy.domain.GetArtwork
-import com.base.andres.splashy.domain.SearchArtworks
+import com.base.andres.splashy.data.remote.ArtworkApiService
+import com.base.andres.splashy.data.mapper.ArtworkMapper
+import com.base.andres.splashy.domain.repository.ArtworkRepository
+import com.base.andres.splashy.domain.usecase.GetArtwork
+import com.base.andres.splashy.domain.usecase.SearchArtworks
 import com.base.andres.splashy.presentation.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

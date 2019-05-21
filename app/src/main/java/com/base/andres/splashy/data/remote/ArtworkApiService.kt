@@ -1,5 +1,7 @@
-package com.base.andres.splashy.data
+package com.base.andres.splashy.data.remote
 
+import com.base.andres.splashy.data.entity.ArtworkRemote
+import com.base.andres.splashy.data.entity.ArtworkSearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,5 +1,6 @@
-package com.base.andres.splashy.domain
+package com.base.andres.splashy.domain.entity
 
+import com.base.andres.splashy.domain.entity.PaperParcelArtwork
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 

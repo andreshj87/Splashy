@@ -1,4 +1,4 @@
-package com.base.andres.splashy.data
+package com.base.andres.splashy.data.entity
 
 import com.squareup.moshi.Json
 
