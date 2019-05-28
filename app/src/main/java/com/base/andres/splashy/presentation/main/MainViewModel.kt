@@ -7,6 +7,7 @@ import com.base.andres.splashy.domain.Failure
 import com.base.andres.splashy.domain.entity.Artwork
 import com.base.andres.splashy.domain.usecase.GetArtwork
 import com.base.andres.splashy.domain.usecase.SearchArtworks
+import com.base.andres.splashy.presentation.Navigator
 import kotlinx.coroutines.Job
 
 class MainViewModel(

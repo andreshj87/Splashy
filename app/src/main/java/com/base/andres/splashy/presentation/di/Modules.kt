@@ -1,40 +1,60 @@
 package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
-import com.base.andres.splashy.data.remote.ArtworkApiService
 import com.base.andres.splashy.data.mapper.ArtworkMapper
+import com.base.andres.splashy.data.remote.ArtworkApiService
 import com.base.andres.splashy.domain.repository.ArtworkRepository
 import com.base.andres.splashy.domain.usecase.GetArtwork
 import com.base.andres.splashy.domain.usecase.SearchArtworks
+import com.base.andres.splashy.presentation.Navigator
 import com.base.andres.splashy.presentation.main.MainViewModel
+import com.base.andres.splashy.presentation.search.ArtworkSearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val applicationModule = module(override = true) {
-    viewModel {
-        MainViewModel(get(), get())
-    }
-
     single {
-        SearchArtworks(get())
-    }
-
-    single {
-        GetArtwork(get())
-    }
-
-    single {
-        ArtworkRepository(get(), get())
+        Navigator()
     }
 
     single {
         ArtworkMapper()
     }
+}
 
+val viewModelModule: Module = module {
+    viewModel {
+        MainViewModel(get(), get())
+    }
+
+    viewModel {
+        ArtworkSearchViewModel(get(), get())
+    }
+}
+
+val useCaseModule: Module = module {
+    factory {
+        SearchArtworks(get())
+    }
+
+    factory {
+        GetArtwork(get())
+    }
+}
+
+val repositoryModule: Module = module {
+    single {
+        ArtworkRepository(get(), get())
+    }
+}
+
+val networkModule: Module = module {
     single {
         provideApiService(get())
     }

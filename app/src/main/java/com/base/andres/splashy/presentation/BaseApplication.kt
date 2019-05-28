@@ -1,7 +1,7 @@
 package com.base.andres.splashy.presentation
 
 import android.app.Application
-import com.base.andres.splashy.presentation.di.applicationModule
+import com.base.andres.splashy.presentation.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -10,7 +10,12 @@ class BaseApplication: Application() {
         super.onCreate()
         startKoin {
             androidContext(this@BaseApplication)
-            modules(applicationModule)
+            modules(
+                applicationModule,
+                viewModelModule,
+                useCaseModule,
+                repositoryModule,
+                networkModule)
         }
     }
 }

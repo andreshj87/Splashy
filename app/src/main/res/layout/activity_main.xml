@@ -8,7 +8,14 @@
     android:orientation="vertical"
     tools:context=".presentation.main.MainActivity">
 
+    <Button
+        android:id="@+id/button_navigate_to_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to search"/>
+
     <TextView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -17,10 +24,12 @@
         android:textColor="@color/colorAccent"/>
 
     <Space
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="24dp"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/text_artwork_highlight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,10 +38,12 @@
         tools:text="Artwork result highlight"/>
 
     <Space
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="16dp"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/text_artwork_results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
