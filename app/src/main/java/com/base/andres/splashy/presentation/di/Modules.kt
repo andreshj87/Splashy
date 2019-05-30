@@ -13,7 +13,6 @@ import com.base.andres.splashy.presentation.main.MainViewModel
 import com.base.andres.splashy.presentation.search.ArtworkSearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -32,7 +31,7 @@ val applicationModule = module(override = true) {
 
 val viewModelModule: Module = module {
     viewModel {
-        MainViewModel(get(), get())
+        MainViewModel()
     }
 
     viewModel {

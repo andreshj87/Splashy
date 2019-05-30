@@ -9,14 +9,14 @@ import com.base.andres.splashy.domain.usecase.SearchArtworks
 import kotlinx.coroutines.Job
 
 class ArtworkSearchViewModel(
-    private val searchArtworks: SearchArtworks,
-    private val getArtwork: GetArtwork
+    private val searchArtworksUseCase: SearchArtworks,
+    private val getArtworkUseCase: GetArtwork
 ): ViewModel() {
     private val job = Job()
     private val artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
 
     fun onSearchClick(keywords: String) {
-        searchArtworks(SearchArtworks.Params(keywords), job) {
+        searchArtworksUseCase(SearchArtworks.Params(keywords), job) {
             it.either(::renderSearchError, ::renderSearchSuccess)
         }
     }

@@ -3,4 +3,5 @@
     <string name="error_message">Error while retrieving data</string>
     <string name="search_hint">Medusa by Bernini</string>
     <string name="search_button">Search</string>
+    <string name="go_to_search">Go to search</string>
 </resources>

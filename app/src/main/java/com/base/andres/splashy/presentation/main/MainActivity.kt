@@ -21,34 +21,5 @@ class MainActivity : AppCompatActivity() {
         button_navigate_to_search.setOnClickListener {
             navigator.navigateToArtworkSearchScreen(this)
         }
-        mainViewModel.artworksFound.observe(this, Observer {
-            if (it != null && it.isNotEmpty()) {
-                showError(false)
-                showResults(it)
-            } else {
-                showError()
-            }
-        })
-        mainViewModel.firstArtwork.observe(this, Observer {
-            if (it != null) {
-                text_artwork_highlight.text = "${it.title} by ${it.artist}"
-            }
-        })
-        mainViewModel.search()
-    }
-
-    private fun showResults(results: List<Artwork>) {
-        var textValues = ""
-        for (searchResult in results) {
-            textValues = "$textValues, ${searchResult.id}"
-        }
-        text_artwork_results.text = textValues
-    }
-
-    private fun showError(show: Boolean = true) {
-        when (show) {
-            true -> text_error.visibility = View.VISIBLE
-            false -> text_error.visibility = View.GONE
-        }
     }
 }
