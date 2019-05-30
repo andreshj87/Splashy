@@ -8,7 +8,7 @@ import com.base.andres.splashy.domain.repository.ArtworkRepository
 class GetArtwork
 constructor(private val artworkRepository: ArtworkRepository): UseCase<Artwork, GetArtwork.Params>() {
     override suspend fun execute(params: Params): Either<Failure, Artwork> {
-        return artworkRepository.getArtwork(params.artworkId)
+        return artworkRepository.get(params.artworkId)
     }
 
     data class Params(val artworkId: Int)

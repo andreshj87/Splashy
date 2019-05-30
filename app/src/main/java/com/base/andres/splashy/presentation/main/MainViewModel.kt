@@ -16,7 +16,7 @@ class MainViewModel(
 ): ViewModel() {
     val termToSearch = "Neptune"
     val job = Job()
-    var artworkIds: MutableLiveData<List<Int>> = MutableLiveData()
+    var artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
     var firstArtwork: MutableLiveData<Artwork?> = MutableLiveData()
 
     fun search() {
@@ -25,10 +25,9 @@ class MainViewModel(
         }
     }
 
-    private fun handleSearchResults(artworkIds: List<Int>) {
-        this.artworkIds.value = artworkIds
-        val firstArtworkId = artworkIds[0]
-        getArtwork(GetArtwork.Params(firstArtworkId), job) {
+    private fun handleSearchResults(artworksFound: List<Artwork>) {
+        this.artworksFound.value = artworksFound
+        getArtwork(GetArtwork.Params(artworksFound[0].id), job) {
             it.either(::renderError, ::renderFirstArtwork)
         }
     }

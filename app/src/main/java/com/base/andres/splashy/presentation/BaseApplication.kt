@@ -15,6 +15,7 @@ class BaseApplication: Application() {
                 viewModelModule,
                 useCaseModule,
                 repositoryModule,
+                datasourceModule,
                 networkModule)
         }
     }

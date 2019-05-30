@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.base.andres.splashy.R
+import com.base.andres.splashy.domain.entity.Artwork
 import com.base.andres.splashy.presentation.Navigator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         button_navigate_to_search.setOnClickListener {
             navigator.navigateToArtworkSearchScreen(this)
         }
-        mainViewModel.artworkIds.observe(this, Observer {
+        mainViewModel.artworksFound.observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
                 showError(false)
                 showResults(it)
@@ -36,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.search()
     }
 
-    private fun showResults(results: List<Int>) {
+    private fun showResults(results: List<Artwork>) {
         var textValues = ""
         for (searchResult in results) {
-            textValues = "$textValues, $searchResult"
+            textValues = "$textValues, ${searchResult.id}"
         }
         text_artwork_results.text = textValues
     }

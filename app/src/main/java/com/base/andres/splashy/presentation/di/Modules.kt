@@ -1,8 +1,10 @@
 package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
+import com.base.andres.splashy.data.datasource.ArtworkApiDataSource
 import com.base.andres.splashy.data.mapper.ArtworkMapper
 import com.base.andres.splashy.data.remote.ArtworkApiService
+import com.base.andres.splashy.domain.datasource.ArtworkRemoteDataSource
 import com.base.andres.splashy.domain.repository.ArtworkRepository
 import com.base.andres.splashy.domain.usecase.GetArtwork
 import com.base.andres.splashy.domain.usecase.SearchArtworks
@@ -50,7 +52,13 @@ val useCaseModule: Module = module {
 
 val repositoryModule: Module = module {
     single {
-        ArtworkRepository(get(), get())
+        ArtworkRepository(get())
+    }
+}
+
+val datasourceModule: Module = module {
+    single {
+        ArtworkApiDataSource(get(), get()) as ArtworkRemoteDataSource
     }
 }
 

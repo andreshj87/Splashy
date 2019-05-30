@@ -7,11 +7,13 @@ import paperparcel.PaperParcelable
 @PaperParcel
 data class Artwork(
     val id: Int,
-    val title: String,
-    val artist: String,
-    val coverPicture: String
+    val title: String? = null,
+    val artist: String? = null,
+    val coverPicture: String? = null
 ): PaperParcelable {
     companion object {
         @JvmField val CREATOR = PaperParcelArtwork.CREATOR
     }
+
+    fun isReady() = !title.isNullOrBlank()
 }
