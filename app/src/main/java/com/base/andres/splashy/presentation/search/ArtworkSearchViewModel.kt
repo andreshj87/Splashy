@@ -13,7 +13,7 @@ class ArtworkSearchViewModel(
     private val getArtworkUseCase: GetArtwork
 ): ViewModel() {
     private val job = Job()
-    private val artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
+    val artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
 
     fun onSearchClick(keywords: String) {
         searchArtworksUseCase(SearchArtworks.Params(keywords), job) {
@@ -27,5 +27,14 @@ class ArtworkSearchViewModel(
 
     private fun renderSearchSuccess(artworksFound: List<Artwork>) {
         this.artworksFound.value = artworksFound
+    }
+
+    fun onGetCount(): Int {
+        return artworksFound.value?.size ?: 0
+    }
+
+    fun onBind(renderer: ArtworkSearchRenderer, position: Int) {
+        val artwork = artworksFound.value!![position]
+        renderer.setTitle(artwork.id.toString())
     }
 }
