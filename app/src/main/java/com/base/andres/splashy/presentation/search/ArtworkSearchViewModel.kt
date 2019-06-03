@@ -35,6 +35,18 @@ class ArtworkSearchViewModel(
 
     fun onBind(renderer: ArtworkSearchRenderer, position: Int) {
         val artwork = artworksFound.value!![position]
-        renderer.setTitle(artwork.id.toString())
+        if (artwork.isReady()) {
+            renderer.setImage(artwork.coverPicture!!)
+            renderer.setTitle(artwork.id.toString())
+        } else {
+            getArtworkUseCase(GetArtwork.Params(artwork.id), job) {
+                if (it.isRight) {
+                    it.either({ }, {
+                        renderer.setImage(it.coverPicture!!)
+                        renderer.setTitle(it.title!!)
+                    })
+                }
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.andres.splashy.R
-import com.base.andres.splashy.domain.entity.Artwork
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_artwork_search.view.*
 
 class ArtworkSearchAdapter(
@@ -31,18 +31,13 @@ class ArtworkSearchAdapter(
 }
 
 class ArtworkSearchViewHolder(val view: View): RecyclerView.ViewHolder(view), ArtworkSearchRenderer {
-    var artwork: Artwork? = null
-        set(value) {
-            field = value
-            view.text_title.text = value?.id.toString()
-        }
-
     override fun setImage(imageUrl: String) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Picasso.get()
+            .load(imageUrl)
+            .into(view.image)
     }
 
     override fun setTitle(title: String) {
-        //artwork = artwork!!.copy(title = title)
         view.text_title.text = title
     }
 }
