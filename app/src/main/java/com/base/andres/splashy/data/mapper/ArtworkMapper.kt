@@ -1,5 +1,6 @@
 package com.base.andres.splashy.data.mapper
 
+import com.base.andres.splashy.data.entity.ArtworkEntity
 import com.base.andres.splashy.data.entity.ArtworkRemote
 import com.base.andres.splashy.domain.entity.Artwork
 
@@ -24,5 +25,23 @@ class ArtworkMapper {
                 artworkRemote.coverPicture
             )
         }
+    }
+
+    fun map(artworkEntity: ArtworkEntity): Artwork {
+        return Artwork(
+            artworkEntity.id,
+            artworkEntity.title,
+            artworkEntity.artist,
+            artworkEntity.coverPicture
+        )
+    }
+
+    fun map(artwork: Artwork): ArtworkEntity {
+        return ArtworkEntity(
+            artwork.id,
+            artwork.title,
+            artwork.artist,
+            artwork.coverPicture
+        )
     }
 }

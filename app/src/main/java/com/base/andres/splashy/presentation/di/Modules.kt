@@ -2,8 +2,12 @@ package com.base.andres.splashy.presentation.di
 
 import com.base.andres.splashy.BuildConfig
 import com.base.andres.splashy.data.datasource.ArtworkApiDataSource
+import com.base.andres.splashy.data.datasource.ArtworkDao
+import com.base.andres.splashy.data.datasource.ArtworkDatabase
+import com.base.andres.splashy.data.datasource.ArtworkRoomDataSource
 import com.base.andres.splashy.data.mapper.ArtworkMapper
 import com.base.andres.splashy.data.remote.ArtworkApiService
+import com.base.andres.splashy.domain.datasource.ArtworkLocalDataSource
 import com.base.andres.splashy.domain.datasource.ArtworkRemoteDataSource
 import com.base.andres.splashy.domain.repository.ArtworkRepository
 import com.base.andres.splashy.domain.usecase.GetArtwork
@@ -13,6 +17,8 @@ import com.base.andres.splashy.presentation.main.MainViewModel
 import com.base.andres.splashy.presentation.search.ArtworkSearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -51,13 +57,21 @@ val useCaseModule: Module = module {
 
 val repositoryModule: Module = module {
     single {
-        ArtworkRepository(get())
+        ArtworkRepository(get(), get())
     }
 }
 
 val datasourceModule: Module = module {
     single {
         ArtworkApiDataSource(get(), get()) as ArtworkRemoteDataSource
+    }
+
+    single {
+        ArtworkDatabase(androidContext()).ArtworkDao()
+    }
+
+    single {
+        ArtworkRoomDataSource(get(), get()) as ArtworkLocalDataSource
     }
 }
 
