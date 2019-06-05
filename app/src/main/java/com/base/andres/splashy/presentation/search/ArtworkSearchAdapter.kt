@@ -29,15 +29,3 @@ class ArtworkSearchAdapter(
         return viewModel.onGetCount()
     }
 }
-
-class ArtworkSearchViewHolder(val view: View): RecyclerView.ViewHolder(view), ArtworkSearchRenderer {
-    override fun setImage(imageUrl: String) {
-        Picasso.get()
-            .load(imageUrl)
-            .into(view.image)
-    }
-
-    override fun setTitle(title: String) {
-        view.text_title.text = title
-    }
-}
