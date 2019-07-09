@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="white">#fff</color>
+    <color name="transparent">#ffff</color>
+    <color name="black">#000</color>
+    <color name="dark_grey">#1e1e1e</color>
+    <!-- https://www.colourlovers.com/palette/4654365/Citrus_Punch -->
+    <color name="sunshine_state">#FF9D00</color>
+    <color name="lime">#BDCF36</color>
+    <color name="spring_lime">#E3F194</color>
+    <color name="blood_orange">#EE544A</color>
+    <color name="all_light">#FFFC59</color>
 </resources>

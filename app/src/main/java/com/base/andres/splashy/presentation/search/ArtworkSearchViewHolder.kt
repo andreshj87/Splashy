@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_artwork_search.view.*
 
-class ArtworkSearchViewHolder(val view: View): RecyclerView.ViewHolder(view), ArtworkSearchRenderer {
+class ArtworkSearchViewHolder(private val view: View): RecyclerView.ViewHolder(view), ArtworkSearchRenderer {
     override fun setImage(imageUrl: String) {
         Picasso.get()
             .load(imageUrl)

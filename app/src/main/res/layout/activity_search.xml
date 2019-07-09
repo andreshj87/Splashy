@@ -2,29 +2,65 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edit_search"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:hint="@string/search_hint"/>
+        app:elevation="0dp">
 
-    <Button
-        android:id="@+id/button_search"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title=""
+            app:navigationIcon="@drawable/ic_back"
+            android:background="@color/blood_orange"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginHorizontal="20dp"
-        android:text="@string/search_button"/>
+        android:paddingTop="36dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical"
+        android:background="@color/blood_orange">
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:maxLines="1"
+            android:maxLength="50"
+            android:hint="@string/search_hint"
+            android:backgroundTint="@color/white"/>
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="36dp"
+            android:background="@color/all_light"
+            android:text="@string/search_button"
+            android:textColor="@color/dark_grey"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_marginTop="-30dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_artwork_search"/>
 
 </LinearLayout>
