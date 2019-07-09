@@ -38,7 +38,7 @@ val applicationModule = module(override = true) {
 
 val viewModelModule: Module = module {
     viewModel {
-        MainViewModel()
+        MainViewModel(get())
     }
 
     viewModel {
