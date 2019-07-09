@@ -4,14 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
     android:orientation="vertical"
     tools:context=".presentation.main.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/dark_grey"
+        android:textSize="36sp"/>
 
     <Button
         android:id="@+id/button_navigate_to_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_to_search"/>
+        android:layout_marginTop="24dp"
+        android:text="@string/search_button"
+        android:textColor="@color/dark_grey"
+        android:textAllCaps="false"
+        android:background="@color/spring_lime"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_artworks"
+            android:textColor="@color/dark_grey"
+            android:textSize="12sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_artwork_search"/>
+
+    </LinearLayout>
 
 </LinearLayout>

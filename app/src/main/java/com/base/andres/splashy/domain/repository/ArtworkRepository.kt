@@ -28,4 +28,8 @@ class ArtworkRepository(
             is Either.Right -> localResponse
         }
     }
+
+    fun getRecent(): Either<Failure, List<Artwork>> {
+        return artworkLocalDataSource.getRecent()
+    }
 }

@@ -7,4 +7,5 @@ import com.base.andres.splashy.domain.entity.Artwork
 interface ArtworkLocalDataSource {
     fun save(artwork: Artwork)
     fun get(artworkId: Int): Either<Failure, Artwork>
+    fun getRecent(): Either<Failure, List<Artwork>>
 }

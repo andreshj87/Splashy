@@ -49,6 +49,7 @@ class ArtworkSearchViewModel(
     }
 
     private fun renderArtwork(renderer: ArtworkSearchRenderer, artwork: Artwork) {
+        renderer.setFullSize()
         renderer.setImage(artwork.coverPicture!!)
         renderer.setTitle(artwork.title!!)
     }

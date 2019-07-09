@@ -27,6 +27,14 @@ class ArtworkMapper {
         }
     }
 
+    fun mapArtworkEntities(artworkEntities: List<ArtworkEntity>): List<Artwork> {
+        val artworks = mutableListOf<Artwork>()
+        artworkEntities.forEach {
+            artworks.add(map(it))
+        }
+        return artworks.toList()
+    }
+
     fun map(artworkEntity: ArtworkEntity): Artwork {
         return Artwork(
             artworkEntity.id,

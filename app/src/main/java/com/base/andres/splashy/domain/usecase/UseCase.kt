@@ -11,4 +11,6 @@ abstract class UseCase<out Type, in Params> {
         val backgroundJob = CoroutineScope(job + Dispatchers.IO).async { execute(params) }
         CoroutineScope(job + Dispatchers.Main).launch { onResult(backgroundJob.await()) }
     }
+
+    class None
 }

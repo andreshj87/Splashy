@@ -12,4 +12,7 @@ interface ArtworkDao {
 
     @Query("SELECT * FROM artwork WHERE id = :artworkId LIMIT 1")
     fun get(artworkId: Int): List<ArtworkEntity>
+
+    @Query("SELECT * FROM artwork")
+    fun getRecent(): List<ArtworkEntity>
 }

@@ -11,6 +11,7 @@ import com.base.andres.splashy.domain.datasource.ArtworkLocalDataSource
 import com.base.andres.splashy.domain.datasource.ArtworkRemoteDataSource
 import com.base.andres.splashy.domain.repository.ArtworkRepository
 import com.base.andres.splashy.domain.usecase.GetArtwork
+import com.base.andres.splashy.domain.usecase.GetRecentArtworks
 import com.base.andres.splashy.domain.usecase.SearchArtworks
 import com.base.andres.splashy.presentation.Navigator
 import com.base.andres.splashy.presentation.main.MainViewModel
@@ -52,6 +53,10 @@ val useCaseModule: Module = module {
 
     factory {
         GetArtwork(get())
+    }
+
+    factory {
+        GetRecentArtworks(get())
     }
 }
 

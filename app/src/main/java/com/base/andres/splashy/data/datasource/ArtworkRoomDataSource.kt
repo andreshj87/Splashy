@@ -30,4 +30,9 @@ class ArtworkRoomDataSource(
         }
         return either
     }
+
+    override fun getRecent(): Either<Failure, List<Artwork>> {
+        val recentArtworks = artworkDao.getRecent()
+        return Either.Right(artworkMapper.mapArtworkEntities(recentArtworks))
+    }
 }

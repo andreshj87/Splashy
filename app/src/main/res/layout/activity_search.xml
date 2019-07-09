@@ -46,7 +46,7 @@
         <Button
             android:id="@+id/button_search"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
             android:background="@color/all_light"
             android:text="@string/search_button"
