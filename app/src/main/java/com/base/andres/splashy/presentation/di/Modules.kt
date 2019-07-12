@@ -14,6 +14,7 @@ import com.base.andres.splashy.domain.usecase.GetArtwork
 import com.base.andres.splashy.domain.usecase.GetRecentArtworks
 import com.base.andres.splashy.domain.usecase.SearchArtworks
 import com.base.andres.splashy.presentation.Navigator
+import com.base.andres.splashy.presentation.main.ArtworkRecentUiMapper
 import com.base.andres.splashy.presentation.main.MainViewModel
 import com.base.andres.splashy.presentation.search.ArtworkSearchViewModel
 import okhttp3.OkHttpClient
@@ -34,11 +35,14 @@ val applicationModule = module(override = true) {
     single {
         ArtworkMapper()
     }
+    single {
+        ArtworkRecentUiMapper()
+    }
 }
 
 val viewModelModule: Module = module {
     viewModel {
-        MainViewModel(get())
+        MainViewModel(get(), get())
     }
 
     viewModel {

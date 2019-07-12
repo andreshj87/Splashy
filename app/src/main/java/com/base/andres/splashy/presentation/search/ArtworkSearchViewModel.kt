@@ -7,7 +7,6 @@ import com.base.andres.splashy.domain.Failure
 import com.base.andres.splashy.domain.entity.Artwork
 import com.base.andres.splashy.domain.usecase.GetArtwork
 import com.base.andres.splashy.domain.usecase.SearchArtworks
-import kotlinx.coroutines.Job
 
 class ArtworkSearchViewModel(
     private val searchArtworksUseCase: SearchArtworks,
@@ -26,21 +25,8 @@ class ArtworkSearchViewModel(
     fun onSearchClick(keywords: String) {
         viewState.value = ArtworkSearchState.Loading
         searchArtworksUseCase(viewModelScope, SearchArtworks.Params(keywords)) {
-            it.either(::renderSearchError, ::renderSearchSuccess)
+            it.either(::renderError, ::renderArtworks)
         }
-    }
-
-    private fun renderSearchSuccess(artworks: List<Artwork>) {
-        this.artworks = artworks
-        if (artworks.isEmpty()) {
-            viewState.value = ArtworkSearchState.Empty
-        } else {
-            viewState.value = ArtworkSearchState.Success(artworks)
-        }
-    }
-
-    private fun renderSearchError(failure: Failure) {
-        viewState.value = ArtworkSearchState.Error
     }
 
     fun onGetCount(): Int {
@@ -65,5 +51,18 @@ class ArtworkSearchViewModel(
     private fun renderArtwork(renderer: ArtworkSearchRenderer, artwork: Artwork) {
         renderer.setImage(artwork.coverPicture!!)
         renderer.setTitle(artwork.title!!)
+    }
+
+    private fun renderArtworks(artworks: List<Artwork>) {
+        this.artworks = artworks
+        if (artworks.isEmpty()) {
+            viewState.value = ArtworkSearchState.Empty
+        } else {
+            viewState.value = ArtworkSearchState.Success(artworks)
+        }
+    }
+
+    private fun renderError(failure: Failure) {
+        viewState.value = ArtworkSearchState.Error
     }
 }
