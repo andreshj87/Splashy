@@ -38,12 +38,16 @@ class ArtworkSearchViewModel(
         if (artwork.isReady()) {
             renderArtwork(renderer, artwork)
         } else {
-            getArtworkUseCase(viewModelScope, GetArtwork.Params(artwork.id)) {
-                if (it.isRight) {
-                    it.either({ }, { artwork ->
-                        renderArtwork(renderer, artwork)
-                    })
-                }
+            getFullArtwork(artwork.id, renderer)
+        }
+    }
+
+    private fun getFullArtwork(artworkId: Int, renderer: ArtworkSearchRenderer) {
+        getArtworkUseCase(viewModelScope, GetArtwork.Params(artworkId)) {
+            if (it.isRight) {
+                it.either({ }, { artwork ->
+                    renderArtwork(renderer, artwork)
+                })
             }
         }
     }
