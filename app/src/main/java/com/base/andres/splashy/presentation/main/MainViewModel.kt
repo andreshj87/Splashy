@@ -16,7 +16,7 @@ class MainViewModel(
 
     fun onInitialize() {
         viewModelScope
-        getRecentArtworks(viewModelScope, UseCase.None()) {
+        getRecentArtworks(viewModelScope) {
             it.either(::renderError, ::renderRecentArtworks)
         }
     }
