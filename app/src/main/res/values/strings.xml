@@ -5,4 +5,7 @@
     <string name="search_button">Search</string>
     <string name="recent_artworks">Recent artworks</string>
     <string name="empty">Empty</string>
+    <string name="error_title">Error</string>
+    <string name="error_default_message">Something bad happened</string>
+    <string name="done">Done</string>
 </resources>

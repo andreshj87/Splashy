@@ -8,14 +8,16 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.base.andres.splashy.R
+import com.base.andres.splashy.presentation.base.BaseActivity
 import com.base.andres.splashy.presentation.base.Emptiable
+import com.base.andres.splashy.presentation.base.Errorable
 import com.base.andres.splashy.presentation.base.Loadable
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.view_empty.*
 import kotlinx.android.synthetic.main.view_loading.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ArtworkSearchActivity: AppCompatActivity(), Loadable, Emptiable {
+class ArtworkSearchActivity: BaseActivity(), Loadable, Emptiable, Errorable {
     companion object {
         fun getCallingIntent(context: Context): Intent {
             return Intent(context, ArtworkSearchActivity::class.java)
@@ -25,9 +27,12 @@ class ArtworkSearchActivity: AppCompatActivity(), Loadable, Emptiable {
     private val viewModel: ArtworkSearchViewModel by viewModel()
     private lateinit var adapter: ArtworkSearchAdapter
 
+    override fun getLayoutResource(): Int {
+        return R.layout.activity_search
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
         setupToolbar()
         setupArtworkList()
         button_search.setOnClickListener {
@@ -49,26 +54,11 @@ class ArtworkSearchActivity: AppCompatActivity(), Loadable, Emptiable {
             when (it) {
                 is ArtworkSearchViewModel.ArtworkSearchState.Loading -> showLoading()
                 is ArtworkSearchViewModel.ArtworkSearchState.Empty -> showEmpty()
+                is ArtworkSearchViewModel.ArtworkSearchState.Error -> showError()
                 is ArtworkSearchViewModel.ArtworkSearchState.Success -> adapter.notifyDataSetChanged()
             }
             adapter.notifyDataSetChanged()
         })
-    }
-
-    override fun showLoading() {
-        view_loading.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        view_loading.visibility = View.GONE
-    }
-
-    override fun showEmpty() {
-        view_empty.visibility = View.VISIBLE
-    }
-
-    override fun hideEmpty() {
-        view_empty.visibility = View.GONE
     }
 
     private fun closeKeyboard() {

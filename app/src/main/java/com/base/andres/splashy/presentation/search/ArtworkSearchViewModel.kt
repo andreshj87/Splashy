@@ -16,6 +16,7 @@ class ArtworkSearchViewModel(
     sealed class ArtworkSearchState {
         object Loading: ArtworkSearchState()
         object Empty: ArtworkSearchState()
+        object Error: ArtworkSearchState()
         data class Success(val artworks: List<Artwork>): ArtworkSearchState()
     }
 
@@ -39,7 +40,7 @@ class ArtworkSearchViewModel(
     }
 
     private fun renderSearchError(failure: Failure) {
-
+        viewState.value = ArtworkSearchState.Error
     }
 
     fun onGetCount(): Int {
