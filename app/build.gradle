@@ -22,6 +22,7 @@ android {
 }
 
 dependencies {
+    def lifecycle_version = "2.1.0-rc01"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
@@ -30,8 +31,9 @@ dependencies {
     implementation "com.google.android.material:material:1.1.0-alpha05"
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    kapt 'android.arch.lifecycle:compiler:1.1.1'
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+    implementation group: 'androidx.lifecycle', name:'lifecycle-viewmodel-ktx', version: "$lifecycle_version"
     implementation 'nz.bradcampbell:paperparcel:2.0.6'
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.6'
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.6'

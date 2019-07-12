@@ -2,6 +2,7 @@ package com.base.andres.splashy.presentation.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.base.andres.splashy.domain.Failure
 import com.base.andres.splashy.domain.entity.Artwork
 import com.base.andres.splashy.domain.usecase.GetArtwork
@@ -12,11 +13,10 @@ class ArtworkSearchViewModel(
     private val searchArtworksUseCase: SearchArtworks,
     private val getArtworkUseCase: GetArtwork
 ): ViewModel() {
-    private val job = Job()
     val artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
 
     fun onSearchClick(keywords: String) {
-        searchArtworksUseCase(SearchArtworks.Params(keywords), job) {
+        searchArtworksUseCase(viewModelScope, SearchArtworks.Params(keywords)) {
             it.either(::renderSearchError, ::renderSearchSuccess)
         }
     }
@@ -38,7 +38,7 @@ class ArtworkSearchViewModel(
         if (artwork.isReady()) {
             renderArtwork(renderer, artwork)
         } else {
-            getArtworkUseCase(GetArtwork.Params(artwork.id), job) {
+            getArtworkUseCase(viewModelScope, GetArtwork.Params(artwork.id)) {
                 if (it.isRight) {
                     it.either({ }, { artwork ->
                         renderArtwork(renderer, artwork)

@@ -2,6 +2,7 @@ package com.base.andres.splashy.presentation.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.base.andres.splashy.domain.Failure
 import com.base.andres.splashy.domain.entity.Artwork
 import com.base.andres.splashy.domain.usecase.GetRecentArtworks
@@ -11,11 +12,11 @@ import kotlinx.coroutines.Job
 class MainViewModel(
     private val getRecentArtworks: GetRecentArtworks
 ) : ViewModel() {
-    private val job = Job()
     val recentArtworks: MutableLiveData<List<Artwork>> = MutableLiveData()
 
     fun onInitialize() {
-        getRecentArtworks(UseCase.None(), job) {
+        viewModelScope
+        getRecentArtworks(viewModelScope, UseCase.None()) {
             it.either(::renderError, ::renderRecentArtworks)
         }
     }
