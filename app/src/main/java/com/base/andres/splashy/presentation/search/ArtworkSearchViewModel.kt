@@ -13,11 +13,28 @@ class ArtworkSearchViewModel(
     private val searchArtworksUseCase: SearchArtworks,
     private val getArtworkUseCase: GetArtwork
 ): ViewModel() {
-    val artworksFound: MutableLiveData<List<Artwork>> = MutableLiveData()
+    sealed class ArtworkSearchState {
+        object Loading: ArtworkSearchState()
+        object Empty: ArtworkSearchState()
+        data class Success(val artworks: List<Artwork>): ArtworkSearchState()
+    }
+
+    val viewState = MutableLiveData<ArtworkSearchState>()
+    var artworks = emptyList<Artwork>()
 
     fun onSearchClick(keywords: String) {
+        viewState.value = ArtworkSearchState.Loading
         searchArtworksUseCase(viewModelScope, SearchArtworks.Params(keywords)) {
             it.either(::renderSearchError, ::renderSearchSuccess)
+        }
+    }
+
+    private fun renderSearchSuccess(artworks: List<Artwork>) {
+        this.artworks = artworks
+        if (artworks.isEmpty()) {
+            viewState.value = ArtworkSearchState.Empty
+        } else {
+            viewState.value = ArtworkSearchState.Success(artworks)
         }
     }
 
@@ -25,16 +42,12 @@ class ArtworkSearchViewModel(
 
     }
 
-    private fun renderSearchSuccess(artworksFound: List<Artwork>) {
-        this.artworksFound.value = artworksFound
-    }
-
     fun onGetCount(): Int {
-        return artworksFound.value?.size ?: 0
+        return artworks.size
     }
 
     fun onBind(renderer: ArtworkSearchRenderer, position: Int) {
-        val artwork = artworksFound.value!![position]
+        val artwork = artworks[position]
         if (artwork.isReady()) {
             renderArtwork(renderer, artwork)
         } else {
